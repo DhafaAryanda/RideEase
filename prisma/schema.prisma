@@ -13,3 +13,79 @@ datasource db {
   url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
+
+enum RoleUser {
+  CUSTOMER
+  ADMIN
+}
+
+enum StatusTicket {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+model User {
+  id       String    @id @default(cuid())
+  name     String
+  email    String    @unique
+  password String
+  passport String?
+  role     RoleUser
+  tickets  Ticket[]
+  sessions Session[]
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model Vehicle {
+  id       String    @id @default(cuid())
+  code     String    @default("HIACE-001")
+  name     String
+  image    String
+  journeys Journey[]
+}
+
+model Journey {
+  id                  String   @id @default(cuid())
+  vehicleId           String
+  vehicle             Vehicle  @relation(fields: [vehicleId], references: [id])
+  departureDate       DateTime
+  departureCity       String
+  departureCityCode   String
+  arrivalDate         DateTime
+  destinationCity     String
+  destinationCityCode String
+  price               Int
+  seats               Seat[]
+  tickets             Ticket[]
+}
+
+model Seat {
+  id         String   @id @default(cuid())
+  journeyId  String
+  journey    Journey  @relation(fields: [journeyId], references: [id])
+  seatNumber String
+  isBooked   Boolean? @default(false)
+  ticket     Ticket?
+}
+
+model Ticket {
+  id           String       @id @default(cuid())
+  code         String       @unique
+  journeyId    String
+  journey      Journey      @relation(fields: [journeyId], references: [id])
+  customerId   String
+  customer     User         @relation(fields: [customerId], references: [id])
+  seatId       String       @unique
+  seat         Seat         @relation(fields: [seatId], references: [id])
+  bookingDate  DateTime
+  price        BigInt
+  status       StatusTicket
+  paymentToken String?
+}
