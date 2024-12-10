@@ -6,15 +6,15 @@ const nextConfig: NextConfig = {
 
     return config;
   },
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       protocol: "https",
-  //       hostname: "xzxlnefxkdkhwzyttkum.supabase.co",
-  //     },
-  //   ],
-  //   unoptimized: true,
-  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "xzxlnefxkdkhwzyttkum.supabase.co",
+      },
+    ],
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
