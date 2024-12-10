@@ -6,7 +6,7 @@ export const getTickets = async () => {
   try {
     const data = await prisma.ticket.findMany({
       include: {
-        flight: true,
+        journey: true,
         customer: true,
         seat: true,
       },

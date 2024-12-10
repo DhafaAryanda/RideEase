@@ -1,15 +1,15 @@
 "use client";
 
-import type { Flight, FlightSeat, Ticket, User } from "@prisma/client";
+import type { Journey, Seat, Ticket, User } from "@prisma/client";
 import type { ColumnDef } from "@tanstack/react-table";
 import ColumnRouteFlight from "../../journeys/components/column-route-journey";
 import { Badge } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type TicketType = Ticket & {
-  flight: Flight;
+  journey: Journey;
   customer: User;
-  seat: FlightSeat;
+  seat: Seat;
 };
 export const columns: ColumnDef<TicketType>[] = [
   {
@@ -22,12 +22,12 @@ export const columns: ColumnDef<TicketType>[] = [
     },
   },
   {
-    accessorKey: "flightId",
-    header: "Detail Penerbangan",
+    accessorKey: "journeyId",
+    header: "Detail Perjalanan",
     cell: ({ row }) => {
       const ticket = row.original;
 
-      return <ColumnRouteFlight flight={ticket.flight} />;
+      return <ColumnRouteFlight journey={ticket.journey} />;
     },
   },
   {

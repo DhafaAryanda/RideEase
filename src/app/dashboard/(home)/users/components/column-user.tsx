@@ -10,8 +10,4 @@ export const column: ColumnDef<User>[] = [
     accessorKey: "email",
     header: "Email",
   },
-  {
-    accessorKey: "passport",
-    header: "Passport",
-  },
 ];
