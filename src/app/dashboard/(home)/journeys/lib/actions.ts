@@ -1,21 +1,21 @@
 "use server";
 
-import { ActionResult } from "@/app/dashboard/(auth)/signin/form/actions";
 import { redirect } from "next/navigation";
-import { formFlightSchema } from "./validation";
+import { formJourneySchema } from "./validation";
 import prisma from "../../../../../../lib/prisma";
 import { generateSeatPerClass } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
+import { ActionResult } from "@/app/dashboard/(auth)/signin/lib/actions";
 
-export async function saveFlight(
+export async function saveJourney(
   prevState: unknown,
   formData: FormData
 ): Promise<ActionResult> {
   const departureDate = new Date(formData.get("departureDate") as string);
   const arrivalDate = new Date(formData.get("arrivalDate") as string);
 
-  const validate = formFlightSchema.safeParse({
-    planeId: formData.get("planeId"),
+  const validate = formJourneySchema.safeParse({
+    vehicleId: formData.get("vehicleId"),
     price: formData.get("price"),
     departureCity: formData.get("departureCity"),
     departureDate,
@@ -34,7 +34,7 @@ export async function saveFlight(
     };
   }
 
-  const data = await prisma.flight.create({
+  const data = await prisma.journey.create({
     data: {
       ...validate.data,
       price: Number.parseInt(validate.data.price),
@@ -43,16 +43,16 @@ export async function saveFlight(
 
   const seats = generateSeatPerClass(data.id);
 
-  await prisma.flightSeat.createMany({
+  await prisma.seat.createMany({
     data: seats,
   });
 
-  revalidatePath("/dashboard/flights");
+  revalidatePath("/dashboard/journeys");
 
-  redirect("/dashboard/flights");
+  redirect("/dashboard/journeys");
 }
 
-export async function updateFlight(
+export async function updateJourney(
   prevState: unknown,
   id: string,
   formData: FormData
@@ -60,8 +60,8 @@ export async function updateFlight(
   const departureDate = new Date(formData.get("departureDate") as string);
   const arrivalDate = new Date(formData.get("arrivalDate") as string);
 
-  const validate = formFlightSchema.safeParse({
-    planeId: formData.get("planeId"),
+  const validate = formJourneySchema.safeParse({
+    vehicleId: formData.get("vehicleId"),
     price: formData.get("price"),
     departureCity: formData.get("departureCity"),
     departureDate,
@@ -80,7 +80,7 @@ export async function updateFlight(
     };
   }
 
-  await prisma.flight.update({
+  await prisma.journey.update({
     where: {
       id: id,
     },
@@ -90,18 +90,18 @@ export async function updateFlight(
     },
   });
 
-  revalidatePath("/dashboard/flights");
-  redirect("/dashboard/flights");
+  revalidatePath("/dashboard/journeys");
+  redirect("/dashboard/journeys");
 }
 
-export async function deleteFlight(id: string) {
+export async function deleteJourney(id: string) {
   try {
-    await prisma.flightSeat.deleteMany({ where: { flightId: id } });
-    await prisma.flight.delete({ where: { id: id } });
+    await prisma.seat.deleteMany({ where: { journeyId: id } });
+    await prisma.journey.delete({ where: { id: id } });
   } catch (error) {
     console.log(error);
   }
 
-  revalidatePath("/dashboard/flights");
-  redirect("/dashboard/flights");
+  revalidatePath("/dashboard/journeys");
+  redirect("/dashboard/journeys");
 }

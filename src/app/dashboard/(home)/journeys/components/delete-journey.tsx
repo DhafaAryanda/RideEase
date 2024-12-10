@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import React, { type FC } from "react";
 import { useFormStatus } from "react-dom";
-import { deleteFlight } from "../lib/actions";
+import { deleteJourney } from "../lib/actions";
 
-interface DeleteFlightProps {
+interface DeleteJourneyProps {
   id: string;
 }
 
@@ -20,13 +20,13 @@ function SubmitButton() {
   );
 }
 
-const DeleteFlight: FC<DeleteFlightProps> = ({ id }) => {
-  const deleteFlightWithId = deleteFlight.bind(null, id);
+const DeleteJourney: FC<DeleteJourneyProps> = ({ id }) => {
+  const deleteJourneyWithId = deleteJourney.bind(null, id);
   return (
-    <form action={deleteFlightWithId}>
+    <form action={deleteJourneyWithId}>
       <SubmitButton />
     </form>
   );
 };
 
-export default DeleteFlight;
+export default DeleteJourney;

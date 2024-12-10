@@ -4,21 +4,21 @@ import { Plus } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import React, { FC } from "react";
-import { columns } from "./components/column-flight";
-import { getFlights } from "./lib/data";
+import { columns } from "./components/column-journey";
+import { getJourneys } from "./lib/data";
 
 export const metadata: Metadata = {
-  title: "Dashboard | Flights",
+  title: "Dashboard | Journeys",
 };
 
-const FlightPage: FC = async () => {
-  const data = await getFlights();
+const JourneyPage: FC = async () => {
+  const data = await getJourneys();
   return (
     <>
       <div className="flex flex-row items-center justify-between">
-        <div className="my-5 text-2xl font-bold">Flights</div>
+        <div className="my-5 text-2xl font-bold">Journeys</div>
         <Button asChild>
-          <Link href={"/dashboard/flights/create"}>
+          <Link href={"/dashboard/journeys/create"}>
             <Plus className="mr-2 h-4 w-4" />
             Tambah Data
           </Link>
@@ -29,4 +29,4 @@ const FlightPage: FC = async () => {
   );
 };
 
-export default FlightPage;
+export default JourneyPage;

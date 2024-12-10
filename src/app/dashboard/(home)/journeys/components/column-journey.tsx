@@ -1,36 +1,37 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { getUrlFile } from "@/lib/supabase";
-import type { Airplane, Flight, FlightSeat } from "@prisma/client";
+import type { Vehicle, Journey, Seat } from "@prisma/client";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import ColumnRouteFlight from "./column-route-flight";
+import ColumnRouteFlight from "./column-route-journey";
 import ColumnSeatPrice from "./column-seatprice";
-import DeleteFlight from "./delete-flight";
+import DeleteJourney from "./delete-journey";
 
-export type FlightColumn = Flight & {
-  plane: Airplane;
-  seats: FlightSeat[];
+export type JourneyColumn = Journey & {
+  vehicle: Vehicle;
+  seats: Seat[];
 };
-export const columns: ColumnDef<FlightColumn>[] = [
+
+export const columns: ColumnDef<JourneyColumn>[] = [
   {
-    accessorKey: "planeId",
-    header: "Pesawat",
+    accessorKey: "vehicleId",
+    header: "Kendaraan",
     cell: ({ row }) => {
-      const flight = row.original;
-      const planeImageUrl = getUrlFile(flight.plane.image);
+      const journey = row.original;
+      const vehicleImageUrl = getUrlFile(journey.vehicle.image);
       return (
         <div className="inline-flex items-center gap-5">
           <Image
-            src={planeImageUrl}
+            src={vehicleImageUrl}
             width={120}
             height={120}
-            alt="Image Plane"
+            alt="Image Vehicle"
             className="rounded-xl"
           />
-          <div className="font-bold">{flight.plane.name}</div>
+          <div className="font-bold">{journey.vehicle.name}</div>
         </div>
       );
     },
@@ -39,34 +40,33 @@ export const columns: ColumnDef<FlightColumn>[] = [
     accessorKey: "departureCity",
     header: "Rute",
     cell: ({ row }) => {
-      const flight = row.original;
+      const journey = row.original;
 
-      return <ColumnRouteFlight flight={flight} />;
+      return <ColumnRouteFlight journey={journey} />;
     },
   },
   {
     accessorKey: "price",
     header: "Harga / Kursi",
     cell: ({ row }) => {
-      const flight = row.original;
+      const journey = row.original;
 
-      return <ColumnSeatPrice flight={flight} />;
+      return <ColumnSeatPrice journey={journey} />;
     },
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const flight = row.original;
+      const journey = row.original;
 
       return (
         <div className="inline-flex gap-5 items-center">
           <Button variant="secondary" size="sm" asChild>
-            <Link href={`/dashboard/flights/edit/${flight.id}`}>
+            <Link href={`/dashboard/journeys/edit/${journey.id}`}>
               <Pencil className="mr-2 w-4 h-4" /> Edit
             </Link>
           </Button>
-          {/* <DeleteAirplane id={plane.id} /> */}
-          <DeleteFlight id={flight.id} />
+          <DeleteJourney id={journey.id} />
         </div>
       );
     },

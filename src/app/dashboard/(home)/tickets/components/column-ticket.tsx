@@ -2,7 +2,7 @@
 
 import type { Flight, FlightSeat, Ticket, User } from "@prisma/client";
 import type { ColumnDef } from "@tanstack/react-table";
-import ColumnRouteFlight from "../../flights/components/column-route-flight";
+import ColumnRouteFlight from "../../journeys/components/column-route-journey";
 import { Badge } from "lucide-react";
 import { cn } from "@/lib/utils";
 

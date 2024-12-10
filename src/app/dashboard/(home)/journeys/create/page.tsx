@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import React, { type FC } from "react";
-import FormFlight from "../components/form-flight";
-import { getAirplanes } from "../../vehicles/lib/data";
+import FormJourney from "../components/form-journey";
+import { getVehicles } from "../../vehicles/lib/data";
 
 export const metadata: Metadata = {
   title: "Dashboard | Create Data Flight",
 };
 
 const CreateFlightPage: FC = async () => {
-  const airplanes = await getAirplanes();
+  const vehicles = await getVehicles();
 
   return (
     <div>
@@ -16,7 +16,7 @@ const CreateFlightPage: FC = async () => {
         <div className="my-5 text-2xl font-bold">Tambah data Flight</div>
       </div>
 
-      <FormFlight type="ADD" airplanes={airplanes} />
+      <FormJourney type="ADD" vehicles={vehicles} />
     </div>
   );
 };

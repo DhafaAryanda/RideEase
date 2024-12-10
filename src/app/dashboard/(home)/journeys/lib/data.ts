@@ -2,30 +2,30 @@
 
 import prisma from "../../../../../../lib/prisma";
 
-export const getFlights = async () => {
+export const getJourneys = async () => {
   try {
-    const flights = await prisma.flight.findMany({
+    const journeys = await prisma.journey.findMany({
       include: {
-        plane: true,
+        vehicle: true,
         seats: true,
       },
     });
 
-    return flights;
+    return journeys;
   } catch (error) {
     console.error(error);
     return [];
   }
 };
 
-export const getFlightById = async (id: string) => {
+export const getJourneyById = async (id: string) => {
   try {
-    const flight = await prisma.flight.findFirst({
+    const journey = await prisma.journey.findFirst({
       where: {
         id: id,
       },
     });
-    return flight;
+    return journey;
   } catch (error) {
     console.error(error);
     return null;

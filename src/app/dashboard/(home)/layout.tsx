@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "../../globals.css";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BookOpenText, Plane, Ticket, User } from "lucide-react";
+import { BookOpenText, Bus, Ticket, User } from "lucide-react";
 import ButtonLogout from "./components/button-logout";
 import { getUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -53,7 +53,7 @@ export default async function DashboardLayout({
                   className="w-full justify-start"
                 >
                   <Link href={"/dashboard/vehicles"}>
-                    <Plane className="mr-2 w-4 h-4" /> Vehicles
+                    <Bus className="mr-2 w-4 h-4" /> Vehicles
                   </Link>
                 </Button>
                 <Button

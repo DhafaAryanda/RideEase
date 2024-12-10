@@ -10,16 +10,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import SubmitFormButton from "../../components/submit-form-button";
-import type { Airplane, Flight } from "@prisma/client";
-import { saveFlight, updateFlight } from "../lib/actions";
-import type { ActionResult } from "@/app/dashboard/(auth)/signin/form/actions";
+import type { Vehicle, Journey } from "@prisma/client";
+import { saveJourney, updateJourney } from "../lib/actions";
 import { useFormState } from "react-dom";
 import { dateFormat } from "@/lib/utils";
+import { ActionResult } from "@/app/dashboard/(auth)/signin/lib/actions";
 
-interface FormFLightProps {
-  airplanes: Airplane[];
+interface FormJourneyProps {
+  vehicles: Vehicle[];
   type?: "ADD" | "EDIT";
-  defaultValues?: Flight | null;
+  defaultValues?: Journey | null;
 }
 
 const initialFormState: ActionResult = {
@@ -27,15 +27,15 @@ const initialFormState: ActionResult = {
   errorDesc: [],
 };
 
-export default function FormFlight({
-  airplanes,
+export default function FormJourney({
+  vehicles,
   defaultValues,
   type,
-}: FormFLightProps) {
-  const updateFlightWithId = (_state: ActionResult, formData: FormData) =>
-    updateFlight(null, defaultValues?.id, formData);
+}: FormJourneyProps) {
+  const updateJourneyWithId = (_state: ActionResult, formData: FormData) =>
+    updateJourney(null, defaultValues?.id, formData);
   const [state, formAction] = useFormState(
-    type === "ADD" ? saveFlight : updateFlightWithId,
+    type === "ADD" ? saveJourney : updateJourneyWithId,
     initialFormState
   );
 
@@ -54,13 +54,13 @@ export default function FormFlight({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="planeId">Pilih Pesawat</Label>
-          <Select name="planeId" defaultValue={defaultValues?.planeId}>
-            <SelectTrigger id="planeId">
+          <Label htmlFor="vehicleId">Pilih Pesawat</Label>
+          <Select name="vehicleId" defaultValue={defaultValues?.vehicleId}>
+            <SelectTrigger id="vehicleId">
               <SelectValue placeholder="Pilih pesawat" />
             </SelectTrigger>
             <SelectContent>
-              {airplanes.map((value) => (
+              {vehicles.map((value) => (
                 <SelectItem key={value.id} value={value.id}>
                   {value.name}
                 </SelectItem>
@@ -79,10 +79,6 @@ export default function FormFlight({
             min={0}
             required
           ></Input>
-          <span className="text-xs text-gray-900">
-            Harga untuk kelas business bertamabah Rp. 500.000 & kelas first
-            bertambah Rp. 750.000
-          </span>
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4">
