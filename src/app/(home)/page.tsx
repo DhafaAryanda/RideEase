@@ -33,156 +33,170 @@ export default async function HomePage() {
                 Nikmati kemudahan memesan dari mana saja dan kapan saja.
               </p>
             </div>
-            <form
-              action={searchJourney}
-              className="bg-white text-rideease-black w-full flex justify-between items-center rounded-[20px] p-5"
-            >
-              <div className="flex gap-[50px] items-center p-5">
-                <div className="flex flex-col justify-center gap-[14px]">
-                  <label htmlFor="departure" className="text-lg">
-                    Keberangkatan
-                  </label>
-                  <div className="flex gap-[10px]">
-                    <div className="flex items-center w-8 h-8 shrink-0">
-                      <BusFront />
-                    </div>
-                    <select
-                      name="departure"
-                      id="departure"
-                      className="font-semibold text-[22px] leading-[26.63px] appearance-none bg-[url(/assets/images/icons/arrow-down.svg)] bg-no-repeat bg-[right_1px] pr-[30px]"
-                    >
-                      <option value="" disabled selected>
-                        Departure
-                      </option>
-                      {filter?.map((val, key) => (
-                        <option
-                          key={`${key} ${val.departureCity}`}
-                          value={val.departureCity}
-                        >
-                          {val.departureCity}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <hr className="border border-[#EDE8F5] h-[60px]" />
-                <div className="flex flex-col justify-center gap-[14px]">
-                  <label htmlFor="arrival" className="text-lg">
-                    Kedatangan
-                  </label>
-                  <div className="flex gap-[10px]">
-                    <div className="flex items-center w-8 h-8 shrink-0">
-                      <BusFront />
-                    </div>
-                    <select
-                      name="arrival"
-                      id="arrival"
-                      className="font-semibold text-[22px] leading-[26.63px] appearance-none bg-[url(/assets/images/icons/arrow-down.svg)] bg-no-repeat bg-[right_1px] pr-[30px]"
-                    >
-                      <option value="" disabled selected>
-                        Arrival
-                      </option>
-                      {filter?.map((val, key) => (
-                        <option
-                          key={`${key} ${val.destinationCity}`}
-                          value={val.destinationCity}
-                        >
-                          {val.destinationCity}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <hr className="border border-[#EDE8F5] h-[60px]" />
-                <div className="flex flex-col justify-center gap-[14px]">
-                  <label htmlFor="date" className="text-lg">
-                    Tanggal Keberangkatan
-                  </label>
-                  <div className="flex gap-[10px]">
-                    <div className="flex items-center w-8 h-8 shrink-0">
-                      <CalendarSearch />
-                    </div>
-                    <input
-                      type="date"
-                      name="date"
-                      id="date"
-                      className="relative font-semibold text-[22px] leading-[26.63px] w-[157px] bg-transparent focus:outline-none appearance-none [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:opacity-0"
-                    />
-                  </div>
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="font-bold text-2xl leading-9 text-rideease-black text-center bg-rideease-light-purple rounded-[18px] p-[12px_30px] flex shrink-0 items-center h-[108px]  transition-all duration-300 hover:shadow-[0_10px_20px_0_#B88DFF]"
+            <div className="mb-10 bg-white/80 backdrop-blur-md text-rideease-black w-full rounded-[20px] p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+              <h2 className="font-semibold text-2xl leading-relaxed mx-2 mb-4 text-center">
+                🚌 Tiket Bus & Shuttle
+              </h2>
+              <form
+                action={searchJourney}
+                className="flex flex-col md:flex-row justify-between items-center gap-6"
               >
-                Explore Now
-              </button>
-            </form>
+                <div className="flex flex-col md:flex-row gap-6 items-center p-5 w-full">
+                  <div className="flex flex-col justify-center gap-3 w-full md:w-auto">
+                    <label htmlFor="departure" className="text-lg font-medium">
+                      Keberangkatan
+                    </label>
+                    <div className="group flex gap-3 p-3 bg-white rounded-xl border-2 border-transparent hover:border-rideease-light-purple transition-all">
+                      <div className="flex items-center w-8 h-8 shrink-0 text-rideease-light-purple">
+                        <BusFront className="group-hover:scale-110 transition-transform" />
+                      </div>
+                      <select
+                        name="departure"
+                        id="departure"
+                        className=" w-full focus:outline-none appearance-none bg-[url(/assets/images/icons/arrow-down.svg)] bg-no-repeat bg-[right_1px] pr-8"
+                      >
+                        <option value="" disabled selected>
+                          Pilih Keberangkatan
+                        </option>
+                        {filter?.map((val, key) => (
+                          <option
+                            key={`${key} ${val.departureCity}`}
+                            value={val.departureCity}
+                          >
+                            {val.departureCity}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="hidden md:block h-14 w-px bg-rideease-light-purple/30" />
+
+                  <div className="flex flex-col justify-center gap-3 w-full md:w-auto">
+                    <label htmlFor="arrival" className="text-lg font-medium">
+                      Kedatangan
+                    </label>
+                    <div className="group flex gap-3 p-3 bg-white rounded-xl border-2 border-transparent hover:border-rideease-light-purple transition-all">
+                      <div className="flex items-center w-8 h-8 shrink-0 text-rideease-light-purple">
+                        <BusFront className="group-hover:scale-110 transition-transform rotate-180" />
+                      </div>
+                      <select
+                        name="arrival"
+                        id="arrival"
+                        className=" w-full focus:outline-none appearance-none bg-[url(/assets/images/icons/arrow-down.svg)] bg-no-repeat bg-[right_1px] pr-8"
+                      >
+                        <option value="" disabled selected>
+                          Pilih Kedatangan
+                        </option>
+                        {filter?.map((val, key) => (
+                          <option
+                            key={`${key} ${val.destinationCity}`}
+                            value={val.destinationCity}
+                          >
+                            {val.destinationCity}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="hidden md:block h-14 w-px bg-rideease-light-purple/30" />
+
+                  <div className="flex flex-col justify-center gap-3 w-full md:w-auto">
+                    <label htmlFor="date" className="text-lg font-medium">
+                      Tanggal Keberangkatan
+                    </label>
+                    <div className="group flex gap-3 p-3 bg-white rounded-xl border-2 border-transparent hover:border-rideease-light-purple transition-all">
+                      <div className="flex items-center w-8 h-8 shrink-0 text-rideease-light-purple">
+                        <CalendarSearch className="group-hover:scale-110 transition-transform" />
+                      </div>
+                      <input
+                        type="date"
+                        name="date"
+                        id="date"
+                        className=" w-full focus:outline-none bg-transparent [&::-webkit-calendar-picker-indicator]:bg-rideease-light-purple/20 [&::-webkit-calendar-picker-indicator]:rounded-lg [&::-webkit-calendar-picker-indicator]:hover:bg-rideease-light-purple/40 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full md:w-auto font-bold text-xl px-8 py-4 text-white bg-gradient-to-r from-rideease-light-purple to-purple-500 rounded-xl hover:shadow-[0_10px_20px_0_#B88DFF] hover:scale-105 active:scale-95 transition-all duration-300"
+                >
+                  Cari Tiket
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
 
       <section
         id="Services"
-        className="container max-w-[1130px] mx-auto flex flex-col pt-[100px] gap-[30px]"
+        className="container max-w-[1130px] mx-auto flex flex-col pt-[100px] gap-[30px] px-4"
       >
-        <h2 className="font-bold text-[32px] leading-[48px] text-center">
+        <h2 className="font-bold text-[40px] leading-[48px] text-center bg-gradient-to-r from-rideease-light-purple to-purple-500 text-transparent bg-clip-text">
           Kami Pastikan Perjalanan <br />
           Anda Nyaman Bersama Kami
         </h2>
-        <div className="flex justify-between">
-          <div className="flex flex-col gap-[30px] w-[220px]">
-            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-rideease-light-purple">
-              <UserCheck className="w-7 h-7" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="flex flex-col gap-[30px] w-full p-6 rounded-2xl hover:bg-rideease-bg-purple transition-all duration-300 group">
+            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-rideease-light-purple group-hover:scale-110 transition-transform">
+              <UserCheck className="w-7 h-7 text-white" />
             </div>
-            <div className="flex flex-col gap-1">
-              <p className="font-bold text-2xl leading-[36px]">
+            <div className="flex flex-col gap-2">
+              <p className="font-bold text-2xl leading-[36px] group-hover:text-rideease-light-purple transition-colors">
                 Kru Berpengalaman
               </p>
               <p className="leading-[30px] text-rideease-off-purple">
                 Kru kami sangat berpengalaman dan profesional dalam melayani
-                pelanggan.
+                pelanggan dengan lebih dari 5 tahun pengalaman.
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-[30px] w-[220px]">
-            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-rideease-light-purple">
-              <ShieldCheck className="w-7 h-7" />
+
+          <div className="flex flex-col gap-[30px] w-full p-6 rounded-2xl hover:bg-rideease-bg-purple transition-all duration-300 group">
+            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-rideease-light-purple group-hover:scale-110 transition-transform">
+              <ShieldCheck className="w-7 h-7 text-white" />
             </div>
-            <div className="flex flex-col gap-1">
-              <p className="font-bold text-2xl leading-[36px]">
+            <div className="flex flex-col gap-2">
+              <p className="font-bold text-2xl leading-[36px] group-hover:text-rideease-light-purple transition-colors">
                 Keamanan Terjamin
               </p>
               <p className="leading-[30px] text-rideease-off-purple">
-                Kami menjamin keamanan dan kenyamanan Anda selama perjalanan.
+                Kami menjamin 100% keamanan dan kenyamanan Anda dengan asuransi
+                perjalanan lengkap.
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-[30px] w-[220px]">
-            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-rideease-light-purple">
-              <Award className="w-7 h-7" />
+
+          <div className="flex flex-col gap-[30px] w-full p-6 rounded-2xl hover:bg-rideease-bg-purple transition-all duration-300 group">
+            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-rideease-light-purple group-hover:scale-110 transition-transform">
+              <Award className="w-7 h-7 text-white" />
             </div>
-            <div className="flex flex-col gap-1">
-              <p className="font-bold text-2xl leading-[36px]">
+            <div className="flex flex-col gap-2">
+              <p className="font-bold text-2xl leading-[36px] group-hover:text-rideease-light-purple transition-colors">
                 Penghargaan Terbaik
               </p>
               <p className="leading-[30px] text-rideease-off-purple">
-                Kami telah menerima berbagai penghargaan atas pelayanan terbaik
-                kami.
+                Pemenang &quot;Best Transportation Service&quot; 3 tahun
+                berturut-turut.
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-[30px] w-[220px]">
-            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-rideease-light-purple">
-              <House className="w-7 h-7" />
+
+          <div className="flex flex-col gap-[30px] w-full p-6 rounded-2xl hover:bg-rideease-bg-purple transition-all duration-300 group">
+            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-rideease-light-purple group-hover:scale-110 transition-transform">
+              <House className="w-7 h-7 text-white" />
             </div>
-            <div className="flex flex-col gap-1">
-              <p className="font-bold text-2xl leading-[36px]">
+            <div className="flex flex-col gap-2">
+              <p className="font-bold text-2xl leading-[36px] group-hover:text-rideease-light-purple transition-colors">
                 Jemput di Rumah
               </p>
               <p className="leading-[30px] text-rideease-off-purple">
-                Kami siap menjemput Anda langsung dari rumah untuk kenyamanan
-                perjalanan Anda.
+                Layanan antar jemput door-to-door 24/7 untuk kenyamanan maksimal
+                Anda.
               </p>
             </div>
           </div>
@@ -190,24 +204,30 @@ export default async function HomePage() {
       </section>
       <section
         id="Testimonials"
-        className="w-full flex flex-col pt-[100px] gap-[30px]"
+        className="w-full flex flex-col pt-[100px] gap-[30px] bg-gradient-to-r from-rideease-light-purple to-purple-500 text-transparent bg-clip-text"
       >
         <div className="flex flex-col gap-[6px] items-center">
-          <h2 className="font-bold text-[32px] leading-[48px] text-center">
-            Testimoni Pelanggan
+          <h2 className="font-bold text-[42px] leading-[48px] text-center bg-gradient-to-r from-rideease-light-purple to-purple-600 bg-clip-text text-transparent">
+            Apa Kata Mereka?
           </h2>
-          <p className="font-medium text-rideease-off-purple">
-            Kami memberikan pengalaman terbaik untuk setiap pelanggan
+          <p className="font-medium text-rideease-off-purple text-lg">
+            Dengarkan pengalaman luar biasa dari pelanggan setia kami
           </p>
         </div>
-        <div className="testimonial-slider w-full overflow-hidden">
+        <div className="testimonial-slider w-full overflow-hidden py-10">
           <div className="slider flex shrink-0 w-max">
-            <div className="animate-[slide_15s_linear_infinite] flex gap-[30px] pl-[30px] items-center h-[228px]">
-              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-rideease-bg-purple p-5 rounded-[20px] overflow-hidden">
-                <p className="review leading-[30px] h-[90px] w-[305px]">
-                  Pelayanan sangat memuaskan, sopir ramah dan profesional. Bus
-                  nyaman dan bersih. Terima kasih RideEase!
-                </p>
+            <div className="animate-[slide_20s_linear_infinite] flex gap-[30px] pl-[30px] items-center h-[250px]">
+              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-white shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-[20px] overflow-hidden border border-rideease-light-purple/20">
+                <div className="flex justify-between items-start">
+                  <p className="review leading-[30px] h-[90px] w-[305px] italic text-gray-700">
+                    &quot;Pelayanan sangat memuaskan, sopir ramah dan
+                    profesional. Bus nyaman dan bersih. Terima kasih
+                    RideEase!&quot;
+                  </p>
+                  <span className="text-4xl text-rideease-light-purple">
+                    &quot;
+                  </span>
+                </div>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <Image
@@ -215,35 +235,42 @@ export default async function HomePage() {
                       width={30}
                       height={30}
                       src="../assets/images/icons/Star.svg"
-                      className="w-5 h-5"
+                      className="w-6 h-6 hover:scale-110 transition-transform"
                       alt="star"
                     />
                   ))}
                 </div>
                 <div className="flex gap-4 items-center">
-                  <div className="flex shrink-0 rounded-full w-[50px] h-[50px] overflow-hidden">
+                  <div className="flex shrink-0 rounded-full w-[60px] h-[60px] overflow-hidden border-2 border-rideease-light-purple">
                     <Image
-                      width={50}
-                      height={50}
+                      width={60}
+                      height={60}
                       src="https://randomuser.me/api/portraits/men/1.jpg"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform"
                       alt="photo"
                     />
                   </div>
                   <div className="flex flex-col gap-[2px]">
-                    <p className="font-bold">Budi Santoso</p>
-                    <p className="text-sm text-rideease-off-purple">
+                    <p className="font-bold text-lg text-rideease-light-purple">
+                      Budi Santoso
+                    </p>
+                    <p className="text-sm text-rideease-off-purple font-medium">
                       Pengusaha
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-rideease-bg-purple p-5 rounded-[20px] overflow-hidden">
-                <p className="review leading-[30px] h-[90px] w-[305px]">
-                  Tepat waktu dan perjalanan yang nyaman. Harga sangat
-                  terjangkau untuk layanan sebagus ini.
-                </p>
+              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-white shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-[20px] overflow-hidden border border-rideease-light-purple/20">
+                <div className="flex justify-between items-start">
+                  <p className="review leading-[30px] h-[90px] w-[305px] italic text-gray-700">
+                    &quot;Tepat waktu dan perjalanan yang nyaman. Harga sangat
+                    terjangkau untuk layanan sebagus ini.&quot;
+                  </p>
+                  <span className="text-4xl text-rideease-light-purple">
+                    &quot;
+                  </span>
+                </div>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <Image
@@ -251,33 +278,42 @@ export default async function HomePage() {
                       width={30}
                       height={30}
                       src="../assets/images/icons/Star.svg"
-                      className="w-5 h-5"
+                      className="w-6 h-6 hover:scale-110 transition-transform"
                       alt="star"
                     />
                   ))}
                 </div>
                 <div className="flex gap-4 items-center">
-                  <div className="flex shrink-0 rounded-full w-[50px] h-[50px] overflow-hidden">
+                  <div className="flex shrink-0 rounded-full w-[60px] h-[60px] overflow-hidden border-2 border-rideease-light-purple">
                     <Image
-                      width={50}
-                      height={50}
+                      width={60}
+                      height={60}
                       src="https://randomuser.me/api/portraits/women/2.jpg"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform"
                       alt="photo"
                     />
                   </div>
                   <div className="flex flex-col gap-[2px]">
-                    <p className="font-bold">Siti Rahma</p>
-                    <p className="text-sm text-rideease-off-purple">Dosen</p>
+                    <p className="font-bold text-lg text-rideease-light-purple">
+                      Siti Rahma
+                    </p>
+                    <p className="text-sm text-rideease-off-purple font-medium">
+                      Dosen
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-rideease-bg-purple p-5 rounded-[20px] overflow-hidden">
-                <p className="review leading-[30px] h-[90px] w-[305px]">
-                  Sistem pemesanan yang mudah dan customer service sangat
-                  membantu. Recommended!
-                </p>
+              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-white shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-[20px] overflow-hidden border border-rideease-light-purple/20">
+                <div className="flex justify-between items-start">
+                  <p className="review leading-[30px] h-[90px] w-[305px] italic text-gray-700">
+                    &quot;Sistem pemesanan yang mudah dan customer service
+                    sangat membantu. Recommended!&quot;
+                  </p>
+                  <span className="text-4xl text-rideease-light-purple">
+                    &quot;
+                  </span>
+                </div>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <Image
@@ -285,36 +321,45 @@ export default async function HomePage() {
                       width={30}
                       height={30}
                       src="../assets/images/icons/Star.svg"
-                      className="w-5 h-5"
+                      className="w-6 h-6 hover:scale-110 transition-transform"
                       alt="star"
                     />
                   ))}
                 </div>
                 <div className="flex gap-4 items-center">
-                  <div className="flex shrink-0 rounded-full w-[50px] h-[50px] overflow-hidden">
+                  <div className="flex shrink-0 rounded-full w-[60px] h-[60px] overflow-hidden border-2 border-rideease-light-purple">
                     <Image
-                      width={50}
-                      height={50}
+                      width={60}
+                      height={60}
                       src="https://randomuser.me/api/portraits/men/3.jpg"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform"
                       alt="photo"
                     />
                   </div>
                   <div className="flex flex-col gap-[2px]">
-                    <p className="font-bold">Ahmad Ridwan</p>
-                    <p className="text-sm text-rideease-off-purple">
+                    <p className="font-bold text-lg text-rideease-light-purple">
+                      Ahmad Ridwan
+                    </p>
+                    <p className="text-sm text-rideease-off-purple font-medium">
                       Mahasiswa
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="animate-[slide_15s_linear_infinite] flex gap-[30px] pl-[30px] items-center h-[228px]">
-              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-rideease-bg-purple p-5 rounded-[20px] overflow-hidden">
-                <p className="review leading-[30px] h-[90px] w-[305px]">
-                  Pelayanan sangat memuaskan, sopir ramah dan profesional. Bus
-                  nyaman dan bersih. Terima kasih RideEase!
-                </p>
+            <div className="animate-[slide_20s_linear_infinite] flex gap-[30px] pl-[30px] items-center h-[250px]">
+              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-white shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-[20px] overflow-hidden border border-rideease-light-purple/20">
+                <div className="flex justify-between items-start">
+                  <p className="review leading-[30px] h-[90px] w-[305px] italic text-gray-700">
+                    &quot;Pelayanan sangat memuaskan, sopir ramah dan
+                    profesional. &quot;Pelayanan sangat memuaskan, sopir ramah
+                    dan profesional. Bus nyaman dan bersih. Terima kasih
+                    RideEase!&quot;
+                  </p>
+                  <span className="text-4xl text-rideease-light-purple">
+                    &quot;
+                  </span>
+                </div>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <Image
@@ -322,35 +367,42 @@ export default async function HomePage() {
                       width={30}
                       height={30}
                       src="../assets/images/icons/Star.svg"
-                      className="w-5 h-5"
+                      className="w-6 h-6 hover:scale-110 transition-transform"
                       alt="star"
                     />
                   ))}
                 </div>
                 <div className="flex gap-4 items-center">
-                  <div className="flex shrink-0 rounded-full w-[50px] h-[50px] overflow-hidden">
+                  <div className="flex shrink-0 rounded-full w-[60px] h-[60px] overflow-hidden border-2 border-rideease-light-purple">
                     <Image
-                      width={50}
-                      height={50}
+                      width={60}
+                      height={60}
                       src="https://randomuser.me/api/portraits/men/1.jpg"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform"
                       alt="photo"
                     />
                   </div>
                   <div className="flex flex-col gap-[2px]">
-                    <p className="font-bold">Budi Santoso</p>
-                    <p className="text-sm text-rideease-off-purple">
+                    <p className="font-bold text-lg text-rideease-light-purple">
+                      Budi Santoso
+                    </p>
+                    <p className="text-sm text-rideease-off-purple font-medium">
                       Pengusaha
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-rideease-bg-purple p-5 rounded-[20px] overflow-hidden">
-                <p className="review leading-[30px] h-[90px] w-[305px]">
-                  Tepat waktu dan perjalanan yang nyaman. Harga sangat
-                  terjangkau untuk layanan sebagus ini.
-                </p>
+              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-white shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-[20px] overflow-hidden border border-rideease-light-purple/20">
+                <div className="flex justify-between items-start">
+                  <p className="review leading-[30px] h-[90px] w-[305px] italic text-gray-700">
+                    &quot;Tepat waktu dan perjalanan yang nyaman. Harga sangat
+                    terjangkau untuk layanan sebagus ini.&quot;
+                  </p>
+                  <span className="text-4xl text-rideease-light-purple">
+                    &quot;
+                  </span>
+                </div>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <Image
@@ -358,33 +410,42 @@ export default async function HomePage() {
                       width={30}
                       height={30}
                       src="../assets/images/icons/Star.svg"
-                      className="w-5 h-5"
+                      className="w-6 h-6 hover:scale-110 transition-transform"
                       alt="star"
                     />
                   ))}
                 </div>
                 <div className="flex gap-4 items-center">
-                  <div className="flex shrink-0 rounded-full w-[50px] h-[50px] overflow-hidden">
+                  <div className="flex shrink-0 rounded-full w-[60px] h-[60px] overflow-hidden border-2 border-rideease-light-purple">
                     <Image
-                      width={50}
-                      height={50}
+                      width={60}
+                      height={60}
                       src="https://randomuser.me/api/portraits/women/2.jpg"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform"
                       alt="photo"
                     />
                   </div>
                   <div className="flex flex-col gap-[2px]">
-                    <p className="font-bold">Siti Rahma</p>
-                    <p className="text-sm text-rideease-off-purple">Dosen</p>
+                    <p className="font-bold text-lg text-rideease-light-purple">
+                      Siti Rahma
+                    </p>
+                    <p className="text-sm text-rideease-off-purple font-medium">
+                      Dosen
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-rideease-bg-purple p-5 rounded-[20px] overflow-hidden">
-                <p className="review leading-[30px] h-[90px] w-[305px]">
-                  Sistem pemesanan yang mudah dan customer service sangat
-                  membantu. Recommended!
-                </p>
+              <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-white shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-[20px] overflow-hidden border border-rideease-light-purple/20">
+                <div className="flex justify-between items-start">
+                  <p className="review leading-[30px] h-[90px] w-[305px] italic text-gray-700">
+                    &quot;Sistem pemesanan yang mudah dan customer service
+                    sangat membantu. Recommended!&quot;
+                  </p>
+                  <span className="text-4xl text-rideease-light-purple">
+                    &quot;
+                  </span>
+                </div>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <Image
@@ -392,24 +453,26 @@ export default async function HomePage() {
                       width={30}
                       height={30}
                       src="../assets/images/icons/Star.svg"
-                      className="w-5 h-5"
+                      className="w-6 h-6 hover:scale-110 transition-transform"
                       alt="star"
                     />
                   ))}
                 </div>
                 <div className="flex gap-4 items-center">
-                  <div className="flex shrink-0 rounded-full w-[50px] h-[50px] overflow-hidden">
+                  <div className="flex shrink-0 rounded-full w-[60px] h-[60px] overflow-hidden border-2 border-rideease-light-purple">
                     <Image
-                      width={50}
-                      height={50}
+                      width={60}
+                      height={60}
                       src="https://randomuser.me/api/portraits/men/3.jpg"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform"
                       alt="photo"
                     />
                   </div>
                   <div className="flex flex-col gap-[2px]">
-                    <p className="font-bold">Ahmad Ridwan</p>
-                    <p className="text-sm text-rideease-off-purple">
+                    <p className="font-bold text-lg text-rideease-light-purple">
+                      Ahmad Ridwan
+                    </p>
+                    <p className="text-sm text-rideease-off-purple font-medium">
                       Mahasiswa
                     </p>
                   </div>
@@ -420,149 +483,134 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <footer className="flex flex-col justify-between mt-[150px] border-t-[6px] border-rideease-light-purple p-[100px_10px_30px]">
-        <div className="container max-w-[1130px] mx-auto flex justify-between relative">
-          <Image
-            width={300}
-            height={300}
-            src="/assets/images/icons/Ellipse 4.png"
-            className="absolute h-[300px] -top-[45px] -left-[20px] z-0"
-            alt="icon"
-          />
-          <div className="flex shrink-0 h-fit z-10">
+      <footer className="relative flex flex-col justify-between mt-[150px] border-t-[6px] border-rideease-light-purple bg-gradient-to-b from-white to-purple-50">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full filter blur-3xl opacity-30"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full filter blur-3xl opacity-20"></div>
+
+        <div className="container max-w-[1130px] mx-auto flex flex-col md:flex-row justify-between p-[100px_10px_30px] relative">
+          <div className="flex flex-col gap-6 mb-10 md:mb-0 z-10">
             <Image
               width={150}
               height={70}
-              src="/assets/images/logos/logo.svg"
-              alt=""
+              src="/assets/images/logos/logo-black.svg"
+              alt="RideEase Logo"
+              className="hover:scale-105 transition-transform"
             />
+            <p className="max-w-xs text-gray-600">
+              Memberikan pengalaman perjalanan terbaik dengan kenyamanan dan
+              keamanan yang terjamin.
+            </p>
           </div>
-          <div className="flex gap-[100px] z-10">
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-[60px] z-10">
             <div className="flex flex-col gap-5">
-              <p className="font-bold text-lg">Explore</p>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
+              <p className="font-bold text-lg text-rideease-light-purple">
+                Explore
+              </p>
+              <div className="flex flex-col gap-4">
+                {["Services", "Testimonials", "Pricing", "About"].map(
+                  (item) => (
+                    <Link
+                      key={item}
+                      href=""
+                      className="font-medium text-gray-600 hover:text-rideease-light-purple hover:translate-x-2 transition-all duration-300"
+                    >
+                      {item}
+                    </Link>
+                  )
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-5">
+              <p className="font-bold text-lg text-rideease-light-purple">
                 Services
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
-                Testimonials
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
-                Pricing
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
+              </p>
+              <div className="flex flex-col gap-4">
+                {[
+                  "Pickup at Home",
+                  "First Lounge Plus",
+                  "Business Room",
+                  "Bentley Power",
+                ].map((item) => (
+                  <Link
+                    key={item}
+                    href=""
+                    className="font-medium text-gray-600 hover:text-rideease-light-purple hover:translate-x-2 transition-all duration-300"
+                  >
+                    {item}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-5">
+              <p className="font-bold text-lg text-rideease-light-purple">
                 About
-              </Link>
+              </p>
+              <div className="flex flex-col gap-4">
+                {[
+                  "Company Profile",
+                  "Our Investors",
+                  "Media Press",
+                  "Careers",
+                ].map((item) => (
+                  <Link
+                    key={item}
+                    href=""
+                    className="font-medium text-gray-600 hover:text-rideease-light-purple hover:translate-x-2 transition-all duration-300"
+                  >
+                    {item}
+                  </Link>
+                ))}
+              </div>
             </div>
+
             <div className="flex flex-col gap-5">
-              <p className="font-bold text-lg">Services</p>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
-                Pickup at Home
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
-                First Lounge Plus
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
-                Business Room
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
-                Bentley Power
-              </Link>
-            </div>
-            <div className="flex flex-col gap-5">
-              <p className="font-bold text-lg">About</p>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
-                Company Profile
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
-                Our Investors
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
-                Media Press
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300"
-              >
-                Careers
-              </Link>
-            </div>
-            <div className="flex flex-col gap-5">
-              <p className="font-bold text-lg">Connect</p>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300 flex items-center gap-[6px]"
-              >
-                <Image
-                  width={20}
-                  height={20}
-                  src="/assets/images/icons/call.svg"
-                  alt="icon"
-                />
-                +1 2208 1996
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300 flex items-center gap-[6px]"
-              >
-                <Image
-                  width={20}
-                  height={20}
-                  src="/assets/images/icons/dribbble.svg"
-                  alt="icon"
-                />
-                buildwithangga
-              </Link>
-              <Link
-                href=""
-                className="font-medium hover:font-semibold hover:text-rideease-light-purple transition-all duration-300 flex items-center gap-[6px]"
-              >
-                <Image
-                  width={20}
-                  height={20}
-                  src="/assets/images/icons/sms.svg"
-                  alt="icon"
-                />
-                team@bwa.com
-              </Link>
+              <p className="font-bold text-lg text-rideease-light-purple">
+                Connect
+              </p>
+              <div className="flex flex-col gap-4">
+                <Link
+                  href=""
+                  className="font-medium text-gray-600 hover:text-rideease-light-purple transition-all duration-300 flex items-center gap-3 group"
+                >
+                  <div className="p-2 bg-purple-100 rounded-full group-hover:bg-purple-200 transition-colors">
+                    <Image
+                      width={24}
+                      height={24}
+                      src="https://cdn-icons-png.flaticon.com/512/455/455705.png"
+                      alt="Phone"
+                      className="w-6 h-6"
+                    />
+                  </div>
+                  +62 812 3456 7890
+                </Link>
+                <Link
+                  href=""
+                  className="font-medium text-gray-600 hover:text-rideease-light-purple transition-all duration-300 flex items-center gap-3 group"
+                >
+                  <div className="p-2 bg-purple-100 rounded-full group-hover:bg-purple-200 transition-colors">
+                    <Image
+                      width={24}
+                      height={24}
+                      src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"
+                      alt="Instagram"
+                      className="w-6 h-6"
+                    />
+                  </div>
+                  @rideease.id
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-        <p className="mx-auto mt-[60px] text-[#A0A0AC] text-sm z-10">
-          All Rights Reserved. Copyright BuildWithAngga 2024.
-        </p>
+
+        <div className="border-t border-purple-100 mt-16">
+          <p className="container max-w-[1130px] mx-auto py-6 text-center text-gray-500 text-sm">
+            © {new Date().getFullYear()} RideEase. All Rights Reserved.
+          </p>
+        </div>
       </footer>
     </>
   );
